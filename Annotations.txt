@@ -1,0 +1,5 @@
+RFID - Radio Frequency Identification
+
+Características dos Cartões:
+- Chip com 1K de memória
+- Quando colocado perto do leitor, o chip da tag recebe um sinal de RF(Rádio Frequência) a antena do chip recebe o sinal e responde para a tag dizendo quem ele é (Número e informações gravadas no chip).

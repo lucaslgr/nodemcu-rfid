@@ -36,13 +36,13 @@ void setup() {
   //Inicializando a serial e setando a velocidade/frequencia
   Serial.begin(9600);
 
-  //==========================================Inicialização o [RFID]==========================================
+  //==========================================Inicialização o [RFID]========================================================
   SPI.begin();
   mfrc522.PCD_Init();
   Serial.println("RFID reading UID");
 
 
-  //==========================================Inicialização o [NODEMCU]==========================================
+  //==========================================Inicialização o [NODEMCU]======================================================
   //Mensagem de inicio de conexão na rede
   Serial.println();
   Serial.println();
@@ -106,30 +106,27 @@ void connectAndRequestHTTP(String uid){
     }
   }
 
-  // Read all the lines of the reply from server and print them to Serial
-  Serial.println("receiving from remote server");
+  // Lê todas as linhas da resposta do servidor e printa na serial
+  Serial.println("Recebendo do servidor remoto");
   // not testing 'client.connected()' since we do not need to send data here
   while (client.available()) {
     char ch = static_cast<char>(client.read());
     Serial.print(ch);
   }
 
-  // Close the connection
+  // Fechand a conexão
   Serial.println();
-  Serial.println("closing connection");
+  Serial.println("Fechando a conexão");
   client.stop();
 
-  delay(10000); // execute once every 10 segundos, don't flood remote service
+  delay(1000); // execute once every 10 segundos, don't flood remote service
 }
 
+//Função para verificar se tem algum RFID presente e fazer a leitura do UID
 void readRFID(){
   //Esvaziando a String
   IDTag = "";
-   
-  //================================================================================================================================================
-  //ESPAÇO RESERVADO PARA LEITURA DO RFID (START)
-  //================================================================================================================================================
-  
+
   //Verificando se existe algum novo cartão presente
   if(mfrc522.PICC_IsNewCardPresent())
   {
@@ -155,11 +152,9 @@ void readRFID(){
       connectAndRequestHTTP(IDTag);
     }
   }
-  //================================================================================================================================================
-  //ESPAÇO RESERVADO PARA LEITURA DO RFID (END)
-  //================================================================================================================================================
 }
 
+//Fica executando a função readRFID
 void loop() {
   readRFID();
 }

@@ -1,3 +1,4 @@
+#include <Arduino.h>
 //Biblioteca do NODEMCU
 #include <ESP8266WiFi.h>
 
@@ -40,7 +41,6 @@ void setup() {
   SPI.begin();
   mfrc522.PCD_Init();
   Serial.println("RFID reading UID");
-
 
   //==========================================Inicialização o [NODEMCU]======================================================
   //Mensagem de inicio de conexão na rede

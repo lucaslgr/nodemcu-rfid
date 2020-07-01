@@ -6,6 +6,8 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
+#define BASE_URL "/projectPontoEletronico/api-batponto/"
+String base_url = BASE_URL;
 
 //====================================================<RFID (START) CONFIG>====================================================
 //Pinos do RFID
@@ -82,16 +84,17 @@ void connectAndRequestHTTP(String uid){
   }
 
   //We now create a URI for the request
-  String url = "/nodemcu/index.php?";
-    url += "uidTag="; //key
-    url += IDTag; //value
+  // String url = "/nodemcu/index.php?";
+  String url = base_url+"access/"+IDTag+"/new";
+    // url += "uidTag="; //key
+    // url += IDTag; //value
 
   // This will send a string to the server
   Serial.println("sending data to server");
   Serial.println(url);
 
   //This will send the request to the server
-  client.print(String("GET ") + url + "HTTP/1.1\r\n"+
+  client.print(String("GET ") + url + "\r\nHTTP\1.1\r\n"+
               "Host: " + host + "\r\n" + 
               "Connection: close\r\n\r\n");
 
